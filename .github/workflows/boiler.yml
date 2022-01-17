@@ -25,16 +25,11 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
           
+      - name: Add nuget source
+        run: dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+          
       - name: .Net build
         run: dotnet build --configuration Release
-         
-#       - name: Set up dependency caching for faster builds
-#         uses: actions/cache@v2
-#         with:
-#           path: ~/.nuget/packages
-#           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-nuget-
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
