@@ -1,0 +1,125 @@
+﻿@using Laboremus_AuthorizationService.Models
+@model Laboremus_AuthorizationService.Models.RegisterUserViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="border-bottom white-bg page-heading m-b-lg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2>User registration</h2>
+            </div>
+            <div class="col-lg-8">
+                <div class="title-action">
+                    <a asp-action="Users" asp-controller="Account" class="pull-right btn btn-link">&larr; Return to users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 m-b-xl">
+            <div class="content-box">
+
+                @if (ViewData["Errors"] != null)
+                {
+                    <div class="text-danger validation-summary-errors">
+                        @Html.ValidationSummary(true)
+                    </div>
+
+                }
+                <form id="register-form" method="post" asp-action="Register">
+                    <h1>Details</h1>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="control-label"></label>
+                                    <input asp-for="FirstName" autocomplete="off" placeholder="John" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="control-label"></label>
+                                    <input asp-for="LastName" placeholder="Doe" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Telephone" class="control-label"></label>
+                                    <input asp-for="Telephone" placeholder="Separate with commas" class="form-control" />
+                                    <span asp-validation-for="Telephone" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" placeholder="someone@@example.com" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <h1>Credentials</h1>
+                    <fieldset>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Role" class="control-label"></label>
+                                    @Html.DropDownListFor(m => m.Role, Html.GetEnumSelectList<UserRole>(), null, new { @class = "form-control", required = "required" })
+                                    <span asp-validation-for="Role" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Username" class="control-label"></label>
+                                    <input asp-for="Username" autocomplete="off" placeholder="John.Doe" class="form-control" />
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="Password" class="control-label"></label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                                    <input asp-for="ConfirmPassword" class="form-control" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    @*<hr />
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="reset" value="Cancel" class="btn btn-default" />
+                    </div>*@
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/steps/jquery.steps.min.js"></script>
+    <script src="~/js/register.js"></script>
+}

@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laboremus_AuthorizationService", "Laboremus_AuthorizationService\Laboremus_AuthorizationService.csproj", "{8CC6C4E5-A4E4-4060-BDE0-8E074EC85826}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Laboremus_AuthorizationService.Tests", "Laboremus_AuthorizationService.Tests\Laboremus_AuthorizationService.Tests.csproj", "{AB289604-C288-4D61-A8FA-7C1EC5A854AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{DAD303A2-2844-4D47-8EE6-B3B2ACE35125}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthorizationServicePlugIn", "AuthorizationServicePlugIn", "{039B154D-922E-496E-9FB1-6F7C77D043F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServicePluginBase", "PlugIns\AuthServicePlugins\AuthServicePluginBase.csproj", "{8DE82DCC-5142-49C1-B1AF-038242E1DB09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CC6C4E5-A4E4-4060-BDE0-8E074EC85826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC6C4E5-A4E4-4060-BDE0-8E074EC85826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC6C4E5-A4E4-4060-BDE0-8E074EC85826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC6C4E5-A4E4-4060-BDE0-8E074EC85826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB289604-C288-4D61-A8FA-7C1EC5A854AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB289604-C288-4D61-A8FA-7C1EC5A854AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB289604-C288-4D61-A8FA-7C1EC5A854AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB289604-C288-4D61-A8FA-7C1EC5A854AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE82DCC-5142-49C1-B1AF-038242E1DB09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE82DCC-5142-49C1-B1AF-038242E1DB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE82DCC-5142-49C1-B1AF-038242E1DB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE82DCC-5142-49C1-B1AF-038242E1DB09}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{039B154D-922E-496E-9FB1-6F7C77D043F1} = {DAD303A2-2844-4D47-8EE6-B3B2ACE35125}
+		{8DE82DCC-5142-49C1-B1AF-038242E1DB09} = {039B154D-922E-496E-9FB1-6F7C77D043F1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC199F29-1F8C-44C9-BE96-A1BF0B36B7F4}
+	EndGlobalSection
+EndGlobal

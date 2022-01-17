@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Laboremus_AuthorizationService.Models.UserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+}
+<div class="border-bottom white-bg page-heading m-b-lg">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h2>Users</h2>
+            </div>
+            <div class="col-lg-8">
+                <div class="title-action">
+                    <a asp-action="Register" asp-controller="Account" class="pull-right btn btn-primary">Add New</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 m-b-xl">
+            <div class="content-box">
+                <table class="table table-striped white-bg table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Username)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Telephone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Username)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Telephone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

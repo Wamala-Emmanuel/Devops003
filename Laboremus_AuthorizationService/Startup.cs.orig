@@ -1,0 +1,337 @@
+﻿#pragma warning disable CS1591 // Missing XML comment
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Reflection;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
+using IdentityModel;
+using IdentityServer4;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
+using Laboremus_AuthorizationService.Core.Extensions;
+using Laboremus_AuthorizationService.Data;
+using Laboremus_AuthorizationService.Models;
+using Laboremus_AuthorizationService.Repositories;
+using Laboremus_AuthorizationService.Repositories.ApiResources;
+using Laboremus_AuthorizationService.Repositories.Client;
+using Laboremus_AuthorizationService.Repositories.ClientClaims;
+using Laboremus_AuthorizationService.Repositories.IdentityResources;
+using Laboremus_AuthorizationService.Services;
+using Laboremus_AuthorizationService.Services.ApiResources;
+using Laboremus_AuthorizationService.Services.Client;
+using Laboremus_AuthorizationService.Services.Clients;
+using Laboremus_AuthorizationService.Services.Clients.Claims;
+using Laboremus_AuthorizationService.Services.IdentityResources;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Serilog;
+using Serilog.Sinks.Email;
+using Swashbuckle.AspNetCore.Swagger;
+using ILogger = Serilog.ILogger;
+
+namespace Laboremus_AuthorizationService
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration, IHostingEnvironment env, ILogger<Startup> logger)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+            Environment = env;
+            logger.LogInformation("##########Authorization Service started");
+        }
+
+        public IConfiguration Configuration { get; }
+        public IHostingEnvironment Environment { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDataProtection()
+                .PersistKeysToFileSystem(new DirectoryInfo(@"Data/PersistKeys"));
+
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("*")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+                });
+            });
+
+            #region Dependency Injection
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<DbContext, ConfigurationDbContext>();
+
+            // Services
+            services.AddScoped(typeof(IService<>), typeof(ServiceBase<>));
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IClientClaimService, ClientClaimService>();
+            services.AddScoped<IApiResourceService, ApiResourceService>();
+            services.AddScoped<IIdentityResourceService, IdentityResourceService>();
+
+            // Repositories
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IClientClaimsRepository, ClientClaimsRepository>();
+            services.AddScoped<IApiResourceRepository, ApiResourceRepository>();
+            services.AddScoped<IIdentityResourceRepository, IdentityResourceRepository>();
+
+            #endregion
+
+            #region IdentityOptions
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 1;
+            });
+
+            #endregion
+
+            #region MVC
+
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(new ValidateModelAttribute());
+                })
+                .AddJsonOptions(options =>
+                    {
+                        options.SerializerSettings.ContractResolver = new DefaultContractResolver()
+                        {
+                            NamingStrategy = new CamelCaseNamingStrategy()
+                        };
+                        options.SerializerSettings.Formatting = Formatting.Indented;
+                        options.SerializerSettings.StringEscapeHandling = StringEscapeHandling.Default;
+                    }
+                );
+
+            #endregion
+
+            #region Identity Server Configurations
+
+            var builder = services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
+                //.AddCertificateFromFile(Configuration, Logger)
+                //// use sql server database to store configuration data
+                .AddConfigurationStore(configDb =>
+                {
+                    configDb.ConfigureDbContext = db =>
+                        db.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                //// use sql server database to store operational data
+                .AddOperationalStore(operationalDb =>
+                {
+                    operationalDb.ConfigureDbContext = db =>
+                        db.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                .AddAspNetIdentity<ApplicationUser>();
+
+            //services.AddAuthentication(IdentityServerConstants.DefaultCookieAuthenticationScheme)
+            //    .AddCookie(IdentityServerConstants.DefaultCookieAuthenticationScheme, options =>
+            //    {
+            //        options.SessionStore = new MemoryCacheTicketStore();
+            //        options.ExpireTimeSpan = TimeSpan.FromHours(1);
+            //    });
+
+            #endregion
+
+            #region Swagger Documentation
+            var enableSwagger = Configuration.GetSwaggerEnabled();
+            if (enableSwagger)
+            {
+                services.AddSwaggerGen(c =>
+                {
+                    c.SwaggerDoc("v1", new Info
+                    {
+                        Title = "Authorization Service",
+                        Version = "beta",
+                        Description = "This is a restful web api for authentication and authorization.",
+                        Contact = new Contact
+                        {
+                            Name = "Wilson Kiggundu",
+                            Email = "wilson@laboremus.no"
+                        }
+                    });
+
+                    var basePath = Environment.WebRootPath;
+                    var xmlPath = Path.Combine(basePath, "Documentation", "AuthService.xml");
+                    c.IncludeXmlComments(xmlPath);
+                });
+            }
+
+            #endregion
+
+            #region Add Authentication
+
+            var providers = Configuration.GetSection("ExternalProviders").Get<List<ExternalProvider>>();
+            var auth = services.AddAuthentication(IdentityServerConstants.ExternalCookieAuthenticationScheme);
+
+            foreach (var provider in providers)
+            {
+                auth.AddOpenIdConnect(provider.Id, provider.DisplayName, options =>
+                {
+                    options.SignInScheme = IdentityConstants.ExternalScheme;
+                    options.SignOutScheme = IdentityConstants.ExternalScheme;
+
+                    options.Authority = $"{provider.Settings.Instance}/{provider.Settings.TenantId}";
+                    options.ClientId = $"{provider.Settings.ClientId}";
+
+                    options.GetClaimsFromUserInfoEndpoint = true;
+
+                    options.ClaimActions.MapUniqueJsonKey("sub", "sub");
+                    options.ClaimActions.MapUniqueJsonKey("name", "name");
+                    options.ClaimActions.MapUniqueJsonKey("given_name", "given_name");
+                    options.ClaimActions.MapUniqueJsonKey("family_name", "family_name");
+                    options.ClaimActions.MapUniqueJsonKey("email", "email");
+                    options.ClaimActions.MapUniqueJsonKey("role", "role");
+                    options.ClaimActions.MapUniqueJsonKey("phone_number", ClaimTypes.MobilePhone);
+                    
+                });
+            }
+
+            auth.AddCookie();
+
+
+            #endregion
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            // Intialization of the database has now been deactivated
+            InitializeDatabase(app);
+
+            #region Exception Handling
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
+            }
+            else
+            {
+                var options = new RewriteOptions()
+                    .AddRedirectToHttps();
+                app.UseRewriter(options);
+            }
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Frame-Options", "DENY");
+                await next();
+            });
+
+            app.UseCustomErrorHandling();
+            #endregion
+
+            app.UseCors("default");
+            app.UseIdentityServer();
+<<<<<<< HEAD
+            
+=======
+>>>>>>> 078218e9fe93a64b58535d39e2a12be8823b4455
+            #region Swagger Documentation
+
+            var enableSwagger = Configuration.GetSwaggerEnabled();
+            if (enableSwagger)
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authorization Service V1");
+                    c.InjectStylesheet("/swagger-ui/custom.css");
+                    c.DocumentTitle = "Authorization Service";
+                    c.RoutePrefix = "docs";
+                });
+            }
+
+            #endregion
+            
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
+
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var applicationDbContext = serviceScope.ServiceProvider
+                    .GetRequiredService<ApplicationDbContext>();
+                applicationDbContext.Database.Migrate();
+                var persistedGrantDbContext = serviceScope.ServiceProvider
+                    .GetRequiredService<PersistedGrantDbContext>();
+                persistedGrantDbContext.Database.Migrate();
+
+                var configDbContext = serviceScope.ServiceProvider
+                    .GetRequiredService<ConfigurationDbContext>();
+                configDbContext.Database.Migrate();
+
+                var roleManager = serviceScope.ServiceProvider
+                    .GetRequiredService<RoleManager<IdentityRole>>();
+
+                #region Identity roles
+                var roles = Configuration.GetSection("SystemRoles").Get<List<string>>();
+                foreach (var role in roles)
+                {
+                    var roleUpper = role.ToUpper();
+                    var exists = roleManager.RoleExistsAsync(roleUpper).GetAwaiter().GetResult();
+                    if (!exists)
+                    {
+                        roleManager.CreateAsync(new IdentityRole { Name = roleUpper }).GetAwaiter().GetResult();
+                    }
+                }
+                #endregion
+                
+                var clientEntities = new Config(Configuration).GetClients().Select(s => s.ToEntity()).ToList();
+                var identityResourcesEntities = Config.GetIdentityResources().Select(s => s.ToEntity()).ToList();
+                var apiResourcesEntities = Config.GetApiResources().Select(s => s.ToEntity()).ToList();
+
+                var clients = JsonConvert.SerializeObject(clientEntities);
+                var identityResources = JsonConvert.SerializeObject(identityResourcesEntities);
+                var apiResources = JsonConvert.SerializeObject(apiResourcesEntities);
+            }
+        }
+    }
+}

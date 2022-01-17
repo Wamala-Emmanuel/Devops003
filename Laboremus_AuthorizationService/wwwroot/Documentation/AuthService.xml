@@ -1,0 +1,1264 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Laboremus_AuthorizationService</name>
+    </assembly>
+    <members>
+        <member name="T:Laboremus_AuthorizationService.Controllers.ApiResourcesController">
+            <inheritdoc />
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ApiResourcesController.#ctor(Laboremus_AuthorizationService.Services.ApiResources.IApiResourceService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ApiResourcesController.Get">
+            <summary>
+            Get all API Resources
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ApiResourcesController.Get(System.Int32)">
+            <summary>
+            Get an API Resource by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ApiResourcesController.Post(Laboremus_AuthorizationService.DTOs.ApiResourceViewModel)">
+            <summary>
+            Add an API Resource
+            </summary>
+            <param name="resource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ApiResourcesController.Put(System.Int32,Laboremus_AuthorizationService.DTOs.ApiResourceViewModel)">
+            <summary>
+            Update an API Resource
+            </summary>
+            <param name="id"></param>
+            <param name="resource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ApiResourcesController.Delete(System.Int32)">
+            <summary>
+            Delete an API Resource
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Controllers.BaseController">
+            <inheritdoc />
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Controllers.ClientClaimsController">
+            <inheritdoc />
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Controllers.ClientsController">
+            <inheritdoc />
+            <summary>
+            Handles all actions about the client
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ClientsController.#ctor(Laboremus_AuthorizationService.Services.Clients.IClientService,AutoMapper.IMapper)">
+            <param name="service"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ClientsController.Get">
+            <summary>
+            Get all clients
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ClientsController.Get(System.Int32)">
+            <summary>
+            Get client by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ClientsController.Put(System.Int32,Laboremus_AuthorizationService.DTOs.ClientViewModel)">
+            <summary>
+            Update client
+            </summary>
+            <param name="id"></param>
+            <param name="client"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ClientsController.Post(Laboremus_AuthorizationService.DTOs.ClientViewModel)">
+            <summary>
+            Add a client
+            </summary>
+            <param name="client"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.ClientsController.DeleteClient(System.Int32)">
+            <summary>
+            Delete a client
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Controllers.CustomClaimsController">
+            <inheritdoc />
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.CustomClaimsController.Get(System.String)">
+            <summary>
+            Get all customClaims
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.CustomClaimsController.Put(Laboremus_AuthorizationService.DTOs.CustomClaimViewModel)">
+            <summary>
+            Update customClaim
+            </summary>
+            <param name="customClaim"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.CustomClaimsController.Post(Laboremus_AuthorizationService.DTOs.CustomClaimViewModel)">
+            <summary>
+            Add a customClaim
+            </summary>
+            <param name="customClaim"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.CustomClaimsController.PostMany(System.Collections.Generic.List{Laboremus_AuthorizationService.DTOs.CustomClaimViewModel})">
+            <summary>
+            Add multiple claims
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.CustomClaimsController.DeleteCustomClaim(System.String)">
+            <summary>
+            Delete a customClaim
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Controllers.IdentityResourcesController">
+            <inheritdoc />
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.IdentityResourcesController.#ctor(Laboremus_AuthorizationService.Services.IdentityResources.IIdentityResourceService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>  
+            <param name="service"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.IdentityResourcesController.Get">
+            <summary>
+            Get all Identity Resources
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.IdentityResourcesController.Get(System.Int32)">
+            <summary>
+            Get an Identity Resource by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.IdentityResourcesController.Post(Laboremus_AuthorizationService.DTOs.IdentityResourceViewModel)">
+            <summary>
+            Add an Identity Resource
+            </summary>
+            <param name="resource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.IdentityResourcesController.Put(System.Int32,Laboremus_AuthorizationService.DTOs.IdentityResourceViewModel)">
+            <summary>
+            Update an Identity Resource
+            </summary>
+            <param name="id"></param>
+            <param name="resource"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.IdentityResourcesController.Delete(System.Int32)">
+            <summary>
+            Delete an Identity Resource
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Controllers.UsersController">
+            <inheritdoc />
+            <summary>
+            This controller handles everything to do with users
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.#ctor(Microsoft.AspNetCore.Identity.UserManager{Laboremus_AuthorizationService.Models.ApplicationUser},Microsoft.Extensions.Logging.ILogger{Laboremus_AuthorizationService.Controllers.UsersController},Microsoft.AspNetCore.Mvc.Infrastructure.IActionContextAccessor,Laboremus_AuthorizationService.Services.ExportService.IExportService)">
+            <summary>
+            </summary>
+            <param name="userManager"></param>
+            <param name="logger"></param>
+            <param name="actionContextAccessor"></param>
+            <param name="exportService"></param>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.Create(Laboremus_AuthorizationService.Models.NewUserViewModel)">
+            <summary>
+                Handle user registration
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.Read(System.String)">
+            <summary>
+                Get details of a user by Id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.Search(Laboremus_AuthorizationService.Models.SearchRequest)">
+            <summary>
+                Searches for a user by Id, Email, Name and Username.
+            </summary>
+            <param name="request"></param>
+            <remarks>If search criterion is not specified, it will return the first 50 users</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.Update(Laboremus_AuthorizationService.Models.UpdateUserViewModel)">
+            <summary>
+                Update user details
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.ChangeStatus(System.String,Laboremus_AuthorizationService.Models.UserLockOutViewModel)">
+            <summary>
+                Activates or deactivates a user
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.Delete(System.String)">
+            <summary>
+            Delete a user
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.CreateExport(Laboremus_AuthorizationService.DTOs.UserExportRequest)">
+            <summary>
+            Initiate an export of users
+            </summary>
+            <remarks>
+            Accepts request for export verification requests. Request is queued and processed as soon as possible.
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.GetExportStatus(System.Guid)">
+            <summary>
+            Get export status
+            </summary>
+            <remarks>Endpoint for getting export status for a specific export request by unique id.</remarks>
+            <param name="id"></param>
+            <example>8754b7cb-d0fc-4499-8a1a-ebfb721cf0fc</example>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Controllers.UsersController.DownloadAsync(System.Guid)">
+            <summary>
+            Download exported users
+            </summary>
+            <remarks>Endpoint for getting export status of requests.</remarks>
+            <param name="id"></param>
+            <example>8754b7cb-d0fc-4499-8a1a-ebfb721cf0fc</example>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Core.Exceptions.InvalidModelException">
+            <inheritdoc />
+            <summary>
+            Invalid Model Exception
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Core.Exceptions.InvalidModelException.#ctor(System.String,System.Collections.Generic.List{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Core.Exceptions.ClientFriendlyException">
+            <inheritdoc />
+            <summary>
+            Exception to pass message to client
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Core.Exceptions.ClientFriendlyException.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Core.Extensions.ErrorHandlingExtensions.UseCustomErrorHandling(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Insert error handling middleware
+            </summary>
+            <param name="builder">IApplication Builder extension</param>    
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Core.Extensions.SigninKeyExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Core.Extensions.SigninKeyExtension.AddCertificateFromFile(Microsoft.Extensions.DependencyInjection.IIdentityServerBuilder,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{Laboremus_AuthorizationService.Startup})">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+            <param name="options"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Extensions.SigninKeyExtension.KeyFilePassword">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Extensions.SigninKeyExtension.KeyFilePath">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Core.Extensions.ValidateModelAttribute.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog._id">
+            <summary>
+            Mongo Db's primary key
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.Id">
+            <summary>
+            Id - primary key
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.Service">
+            <summary>
+            Destination / Origin service e.g. Crm, Log, Ledger, Notification
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.OrganisationId">
+            <summary>
+            Organisation Id
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.EntityName">
+            <summary>
+            Name of the entity e.g. Telephone, Contact, Organisation
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.CreatedAt">
+            <summary>
+            Date when the entry was originally created. Should be in UTC format
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.CreatedBy">
+            <summary>
+            ID of the user that created the entry
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.Method">
+            <summary>
+            Action that needs to be taken : Add = 1, Update = 2, Delete = 3
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.CreatedAtServer">
+            <summary>
+            Stores the date time when the entity is created at the server.
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Core.Helpers.Logger.ChangeLog.Data">
+            <summary>
+            Data to be synchronized
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Core.Helpers.Logger.Method">
+            <summary>
+            Method
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.Method.Add">
+            <summary>
+            Add
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.Method.Update">
+            <summary>
+            Update
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.Method.Delete">
+            <summary>
+            Delete
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService">
+            <summary>
+            Service
+            </summary>  
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService.CrmService">
+            <summary>
+            CRM Service
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService.AuthService">
+            <summary>
+            Auth Service
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService.LedgerService">
+            <summary>
+            Ledger Service
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService.SyncService">
+            <summary>
+            Sync Service
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService.BackOffice">
+            <summary>
+            Back Office
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService.LoggingService">
+            <summary>
+            Logging Service
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.ClientService.NotificationService">
+            <summary>
+            Notification Service
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.LogType.Add">
+            <summary>
+            Add a new entry
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.LogType.Modify">
+            <summary>
+            Modify an entr3
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.LogType.Delete">
+            <summary>
+            Delete an entry
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.LogType.Access">
+            <summary>
+            Access a resource
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Core.Helpers.Logger.LogType.Exception">
+            <summary>
+            Throw an exception
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Core.Helpers.StringExtensions.TryGetClaimValue(System.Collections.Generic.List{System.Security.Claims.Claim},System.String)">
+            <summary>
+            Returns the value of a given claim. Otherwise null will be returned.
+            </summary>
+            <param name="claims"></param>
+            <param name="claimType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Core.Helpers.StringExtensions.GetByteArrayFromString(System.String)">
+            <summary>
+            converts a string into a byte array
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.DTOs.ExportPagination.Page">
+            <summary>
+            Page number
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.DTOs.ExportPagination.ItemsPerPage">
+            <summary>
+            Number of requests returned per page
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.DTOs.ExportPagination.TotalItems">
+            <summary>
+            Total number of requests
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.DTOs.UserExportRequest.Roles">
+            <summary>
+            user roles
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.DTOs.UserExportRequest.lockedOut">
+            <summary>
+            Whether the user is active or not
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.ExportStatusResponse.Status">
+            <summary>
+            Status of the request
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.PendingResponse.Id">
+            <summary>
+            Unique Id of the request
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.PendingResponse.RequestUri">
+            <summary>
+            The Url to find the request
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.AccountViewModels.RegisterViewModel">
+            <summary>
+            Register ViewModel
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel">
+            <summary>
+            Login ViewModel
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel.ClientId">
+            <summary>
+            Client Id
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel.ClientSecret">
+            <summary>
+            Client Secret
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel.RequestingAccessTo">
+            <summary>
+            The resources the client wants to access
+            <example>openid, profile, offline_access</example>
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel.IdentityProvider">
+            <summary>
+            Identity Provider
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Models.AccountViewModels.UserLoginViewModel.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.AccountViewModels.IdentityProvider">
+            <inheritdoc />
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.AccountViewModels.IdentityProvider.LocalUsers">
+            <summary>
+            Local users 
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.AccountViewModels.IdentityProvider.OnPremiseActiveDirectory">
+            <summary>
+            On Premise Active Directory
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.AccountViewModels.IdentityProvider.AzureAd">
+            <summary>
+            Azure Active Diretory
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.ClientCredentials">
+            <summary>
+            Client Details
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.ClientCredentials.ClientId">
+            <summary>
+            Client ID
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.ClientCredentials.ClientSecret">
+            <summary>
+            Client Secret
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.ExportStatus">
+            <summary>
+            The stage at which the export request is at
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.ExportStatus.Processing">
+            <summary>
+            The request is still being processed
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.ExportStatus.Complete">
+            <summary>
+            The request was complete and successful
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.LoginResponse">
+            <summary>
+            User login response
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.LoginResponse.AccessToken">
+            <summary>
+            Access Token
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.LoginResponse.RefreshToken">
+            <summary>
+            Refresh token
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.LoginResponse.ExpiresIn">
+            <summary>
+            Time in seconds
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.LoginResponse.Claims">
+            <summary>
+            User claims 
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.RefreshTokenViewModel">
+            <summary>
+            Refresh token view model
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RefreshTokenViewModel.RefreshToken">
+            <summary>
+            Refresh token
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RefreshTokenViewModel.ClientId">
+            <summary>
+            Client ID
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RefreshTokenViewModel.ClientSecret">
+            <summary>
+            Client Secret
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.RevokeTokensViewModel">
+            <summary>
+            Revoke Tokens View Model
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RevokeTokensViewModel.AccessToken">
+            <summary>
+            Access Token to revoke
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RevokeTokensViewModel.RefreshToken">
+            <summary>
+            Refresh token to revoke
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RevokeTokensViewModel.Client">
+            <summary>
+            Client details
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.UserExportViewModel.Id">
+            <summary>
+            The user's identifier
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.UserExportViewModel.Fullname">
+            <summary>
+            User's full name
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.UserExportViewModel.Email">
+            <summary>
+            The end-user's preferred email address
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.UserExportViewModel.Role">
+            <summary>
+            User's role
+            <example>nin_verifier</example>
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.UserExportViewModel.Status">
+            <summary>
+            Shows whether the user is active or not in the system
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Models.RegisterUserViewModel">
+            <summary>
+            Register user
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.FirstName">
+            <summary>
+            First Name
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.LastName">
+            <summary>
+            Last name
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.Username">
+            <summary>
+            Username
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.ConfirmPassword">
+            <summary>
+            Confirm password
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.Telephone">
+            <summary>
+            Telephone: separate with commas
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.Email">
+            <summary>
+            Email address
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.RegisterUserViewModel.Role">
+            <summary>
+            User role
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.UserRole.Administrator">
+            <summary>
+            Coop Admin
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.UserRole.participant_super_user">
+            <summary>
+            Participant super user
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.UserRole.sys_admin">
+            <summary>
+            Sys Admin
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.UserRole.billing_operator">
+            <summary>
+            Billing operator
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.UserRole.auditor">
+            <summary>
+            Auditor
+            </summary>
+        </member>
+        <member name="F:Laboremus_AuthorizationService.Models.UserRole.nin_verifier">
+            <summary>
+            Nin Verifier
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.NewUserViewModel.Fullname">
+            <summary>
+            User's full name
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.NewUserViewModel.Roles">
+            <summary>
+            User's role
+            <example>nin_verifier</example>
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.NewUserViewModel.PreferredUsername">
+            <summary>
+            The username by which the end-user wants to be referred to at the client application
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.NewUserViewModel.Password">
+            <summary>
+            User password
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.NewUserViewModel.Telephone">
+            <summary>
+            The end-user's preferred telephone number
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.NewUserViewModel.Email">
+            <summary>
+            The end-user's preferred email address
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.EditUserViewModel.Fullname">
+            <summary>
+            User's full name
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.EditUserViewModel.Roles">
+            <summary>
+            User's role
+            <example>nin_verifier</example>
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.EditUserViewModel.PreferredUsername">
+            <summary>
+            The username by which the end-user wants to be referred to at the client application
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.EditUserViewModel.Telephone">
+            <summary>
+            The end-user's preferred telephone number
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.EditUserViewModel.Email">
+            <summary>
+            The end-user's preferred email address
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.Address.Formatted">
+            <summary>
+            The full mailing address, with multiple lines if necessary. Newlines can be represented either as a \r\n or as a \n
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.Address.StreetAddress">
+            <summary>
+            The street address component, which may include house number, street name, post office box, and other multi-line information. Newlines can be represented either as a \r\n or as a \n
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.Address.Locality">
+            <summary>
+            City or locality component
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.Address.Region">
+            <summary>
+            State, province, prefecture or region component
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.Address.PostalCode">
+            <summary>
+            Zip code or postal code component
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.Address.Country">
+            <summary>
+            Country name component
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.SearchRequest.Id">
+            <summary>
+            User Id. This is an exact match
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.SearchRequest.Email">
+            <summary>
+            User email. Uses full text search. Returns all users whose email matches the given criterion
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.SearchRequest.Name">
+            <summary>
+            Name. Uses full text search. Returns all users whose full name, first name or last name matches the given criterion
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.SearchRequest.Username">
+            <summary>
+            Username. Uses full text search. Returns all users whose username matches the given criterion
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.SearchRequest.Page">
+            <summary>
+            Defaults to 1
+            </summary>
+        </member>
+        <member name="P:Laboremus_AuthorizationService.Models.SearchRequest.ItemsPerPage">
+            <summary>
+            Defaults to 50
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Frontend.Account.AccountController">
+            <inheritdoc />
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.#ctor(Microsoft.AspNetCore.Identity.UserManager{Laboremus_AuthorizationService.Models.ApplicationUser},Microsoft.AspNetCore.Identity.SignInManager{Laboremus_AuthorizationService.Models.ApplicationUser},IdentityServer4.Services.IIdentityServerInteractionService,IdentityServer4.Stores.IClientStore,Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider,IdentityServer4.Services.IEventService,Microsoft.Extensions.Logging.ILogger{Laboremus_AuthorizationService.Frontend.Account.AccountController},Microsoft.Extensions.Configuration.IConfiguration,Laboremus_AuthorizationService.Services.Claims.ICustomClaimsService,Microsoft.AspNetCore.Identity.RoleManager{Microsoft.AspNetCore.Identity.IdentityRole},Laboremus_AuthorizationService.Services.EmailSender.IEmailSender)">
+            <inheritdoc />
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.Register">
+            <summary>
+            Show registration page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.Register(Laboremus_AuthorizationService.Models.RegisterUserViewModel)">
+            <summary>
+            Handle postback for user registration
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.Users">
+            <summary>
+            Display all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.Login(System.String)">
+            <summary>
+            Show login page
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.Login(Laboremus_AuthorizationService.Frontend.Account.LoginInputModel,System.String)">
+            <summary>
+            Handle postback from username/password login
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ExternalLogin(System.String,System.String)">
+            <summary>
+            initiate roundtrip to external authentication provider
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ExternalLoginCallback">
+            <summary>
+            Post processing of external authentication
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ForgotPassword">
+            <summary>
+            display the forgot password form
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ForgotPasswordAsync(Laboremus_AuthorizationService.Models.AccountViewModels.ForgotPasswordViewModel)">
+            <summary>
+            handle Post forgot password form data
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.Logout(System.String)">
+            <summary>
+            Show logout page
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.Logout(Laboremus_AuthorizationService.Frontend.Account.LogoutInputModel)">
+            <summary>
+            Handle logout page postback
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ForgotPasswordConfirmation(Laboremus_AuthorizationService.Models.AccountViewModels.ForgotPasswordConfirmationViewModel)">
+            <summary>
+            Handle forgot password confirmation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ResetPassword(System.String)">
+            <summary>
+            Display reset password form
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ResetPassword(Laboremus_AuthorizationService.Models.AccountViewModels.ResetPasswordViewModel)">
+            <summary>
+            handle reset password
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.ResetPasswordConfirmation">
+            <summary>
+            handle reset password confirmation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Account.AccountController.SanitizeClaims(Microsoft.AspNetCore.Authentication.AuthenticateResult)">
+            <summary>
+            Some claim types are the same e.g. JwtClaimTypes.Role and JwtClaimTypes.Role
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Frontend.Consent.ConsentController">
+            <summary>
+            This controller processes the consent UI
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Consent.ConsentController.Index(System.String)">
+            <summary>
+            Shows the consent screen
+            </summary>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Consent.ConsentController.Index(Laboremus_AuthorizationService.Frontend.Consent.ConsentInputModel)">
+            <summary>
+            Handles the consent screen postback
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Extensions.IsPkceClientAsync(IdentityServer4.Stores.IClientStore,System.String)">
+            <summary>
+            Determines whether the client is configured to use PKCE.
+            </summary>
+            <param name="store">The store.</param>
+            <param name="client_id">The client identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Frontend.Grants.GrantsController">
+            <summary>
+            This sample controller allows a user to revoke grants given to clients
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Grants.GrantsController.Index">
+            <summary>
+            Show list of grants
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Grants.GrantsController.Revoke(System.String)">
+            <summary>
+            Handle postback to revoke a client
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Frontend.Home.HomeController.Error(System.String,System.String)">
+            <summary>
+            Shows the error page
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Repositories.ClientClaims.ClientClaimsRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.ClientClaims.ClientClaimsRepository.#ctor(IdentityServer4.EntityFramework.DbContexts.ConfigurationDbContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Repositories.ClientClaims.IClientClaimsRepository">
+            <inheritdoc />
+            <summary>
+            Client Repository Interface
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Repositories.Client.ClientRepository">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.Client.ClientRepository.#ctor(IdentityServer4.EntityFramework.DbContexts.ConfigurationDbContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Repositories.Client.IClientRepository">
+            <inheritdoc />
+            <summary>
+            Client Repository Interface
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.ExportRequests.IExportRequestRepository.GetNotDownloadedRequestsExportListAsync(System.Int32,System.Double)">
+            <summary>
+            Returns a list of Requestsexports that are completed but not downloaded after x days
+            </summary>
+            <param name="days"></param>
+            <param name="offset"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Repositories.GenericRepository`1">
+            <inheritdoc />
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Repositories.IGenericRepository`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.FirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.GetAll">
+            <summary>
+            Get all queries
+            </summary>
+            <returns>IQueryable queries</returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.FindBy(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Find queries by predicate
+            </summary>
+            <param name="predicate">search predicate (LINQ)</param>
+            <returns>IQueryable queries</returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.FindAsync(System.Object[])">
+            <summary>
+            Find entity by keys
+            </summary>
+            <param name="keys">search key</param>
+            <returns>T entity</returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.AddAsync(`0)">
+            <summary>
+            Add new entity
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.AddRangeAsync(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Add multiple entity
+            </summary>
+            <param name="entities"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.Delete(`0)">
+            <summary>
+            Remove entity from database
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.Delete(System.Object[])">
+            <summary>
+            Remove entity from database
+            </summary>
+            <param name="keys">entity keys</param>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.UpdateAsync(System.Object,`0)">
+            <summary>
+            Edit entity
+            </summary>
+            <param name="id"></param>
+            <param name="entity"></param>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.SaveChanges">
+            <summary>
+            Persists all updates to the data source.
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Repositories.IGenericRepository`1.SaveChangesAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Services.Clients.Claims.ClientClaimService">
+            <summary>
+            Client Service
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.Clients.Claims.ClientClaimService.#ctor(Laboremus_AuthorizationService.Repositories.IGenericRepository{IdentityServer4.EntityFramework.Entities.ClientClaim},AutoMapper.IMapper)">
+            <summary>
+            Client Service Constructor
+            </summary>
+            <param name="repository"></param>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Services.Clients.Claims.IClientClaimService">
+            <summary>
+            Client Service
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Services.Clients.ClientService">
+            <summary>
+            Client Service
+            </summary>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.Clients.ClientService.#ctor(Laboremus_AuthorizationService.Repositories.Client.IClientRepository,AutoMapper.IMapper)">
+            <summary>
+            Client Service Constructor
+            </summary>
+            <param name="repository"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Services.Clients.IClientService">
+            <summary>
+            Client Service
+            </summary>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Services.IServiceBase`2">
+            <summary>
+            Generic Services Interface
+            </summary>
+            <typeparam name="T">Generic Model</typeparam>   
+            <typeparam name="TV">Generic ViewModel</typeparam>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.FirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.GetAll">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.FindBy(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.FindAsync(System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.AddAsync(`1)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.DeleteAsync(`1)">
+            <summary>
+            
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.DeleteAsync(System.Object[])">
+            <summary>
+            
+            </summary>
+            <param name="keys"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Laboremus_AuthorizationService.Services.IServiceBase`2.UpdateAsync(System.Object,`1)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Laboremus_AuthorizationService.Services.ServiceBase`2">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

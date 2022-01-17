@@ -1,0 +1,23 @@
+﻿.topbar {
+    background: #222 !important;
+}
+
+.swagger-ui label {
+    color: white !important;
+}
+
+.swagger-ui .information-container .info {
+    margin: 25px 0 !important;
+}
+
+.swagger-ui .information-container hgroup.main a {
+    display: none !important;
+}
+
+.swagger-ui .opblock .opblock-summary-description {
+    text-align: right !important;
+}
+
+.swagger-ui .topbar a {
+    display: none !important;
+}
