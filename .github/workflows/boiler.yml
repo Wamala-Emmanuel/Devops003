@@ -3,11 +3,12 @@ name: CI
 env:
   AZURE_WEBAPP_NAME: devops002    
   AZURE_WEBAPP_PACKAGE_PATH: '.'      
-  DOTNET_VERSION: '3.1.x'                
+  DOTNET_VERSION: '3.1.x'
+  NUGET_URL: https://pkgs.dev.azure.com/laboremus-uganda/LUG/_packaging/LugNuGetFeed/nuget/v3/index.json
 
 on:
   push:
-    branches: [ main ] 
+#     branches: [ main ] 
   workflow_dispatch:
 
 jobs:
@@ -21,20 +22,12 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-          source-url: ${{ secrets.NUGET_URL }}
+          source-url: ${{ env.NUGET_URL }}
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN }}
           
       - name: .Net build
         run: dotnet build --configuration Release
-         
-#       - name: Set up dependency caching for faster builds
-#         uses: actions/cache@v2
-#         with:
-#           path: ~/.nuget/packages
-#           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-#           restore-keys: |
-#             ${{ runner.os }}-nuget-
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
