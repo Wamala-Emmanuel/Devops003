@@ -29,24 +29,24 @@ jobs:
         npm run build --if-present
         npm run test --if-present
 
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: AuthUI
-        path: .
+#     - name: Upload artifact for deployment job
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: AuthUI
+#         path: dist
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+#   deploy:
+#     runs-on: ubuntu-latest
+#     needs: build
+#     environment:
+#       name: 'Development'
+#       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: AuthUI
+#     steps:
+#     - name: Download artifact from build job
+#       uses: actions/download-artifact@v2
+#       with:
+#         name: AuthUI
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp 
