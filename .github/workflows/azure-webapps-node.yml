@@ -1,3 +1,5 @@
+name: Prod AuthUI
+
 on:
   push:
     branches:
