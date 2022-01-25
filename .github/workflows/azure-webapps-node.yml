@@ -26,13 +26,13 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install
-        npm run build --if-present
+        npm run build${{ secrets.CLIENT }} --if-present
         npm run test --if-present
 
 #     - name: Upload artifact for deployment job
 #       uses: actions/upload-artifact@v2
 #       with:
-#         name: AuthUI
+#         name: ${{ secrets.CLIENT }}-AuthUI
 #         path: dist
 
 #   deploy:
@@ -43,10 +43,10 @@ jobs:
 #       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
 #     steps:
-#     - name: Download artifact from build job
-#       uses: actions/download-artifact@v2
-#       with:
-#         name: AuthUI
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{ secrets.CLIENT }}-AuthUI
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp 
