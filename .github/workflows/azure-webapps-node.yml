@@ -29,11 +29,11 @@ jobs:
         npm run build${{ secrets.CLIENT }} --if-present
         npm run test --if-present
 
-#     - name: Upload artifact for deployment job
-#       uses: actions/upload-artifact@v2
-#       with:
-#         name: ${{ secrets.CLIENT }}-AuthUI
-#         path: dist
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ secrets.CLIENT }}-AuthUI
+        path: dist
 
 #   deploy:
 #     runs-on: ubuntu-latest
