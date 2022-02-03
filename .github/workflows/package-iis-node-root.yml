@@ -22,6 +22,10 @@ on:
       SERVER_PORT:
         type: string
 
+    secrets:
+      WEBDEPLOY_PASSWORD:
+        required: true
+
 jobs:
   Build-Package-IIS_Deploy:
     runs-on: ubuntu-latest
