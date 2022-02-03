@@ -15,8 +15,6 @@ on:
         type: string
       WEBDEPLOY_USER:
         type: string
-      WEBDEPLOY_PASSWORD:
-        type: string
       SERVER_IP:
         type: string
       SERVER_PORT:
