@@ -1,0 +1,68 @@
+name: Root workflow
+
+on:
+  workflow_call:
+    inputs:
+      CLIENT:
+        type: string
+      CLIENT_ENV:
+        type: string
+      DOWNLOAD_PACKAGE:
+        type: string
+      DEPLOY_IIS:
+        type: string
+      SITE_NAME:
+        type: string
+      WEBDEPLOY_USER:
+        type: string
+      WEBDEPLOY_PASSWORD:
+        type: string
+      SERVER_IP:
+        type: string
+      SERVER_PORT:
+        type: string
+
+jobs:
+  Build-Package-IIS_Deploy:
+    runs-on: ubuntu-latest
+    environment: 'Production'
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: 'npm'
+
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build-${{ inputs.CLIENT }}-${{ inputs.CLIENT }} --if-present
+        npm run test --if-present
+
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v2
+      with:
+        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT }}
+        path: dist
+
+    - name: Download artifact from build job
+      if: ${{ inputs.DOWNLOAD_PACKAGE == 'Download' }}
+      uses: actions/download-artifact@v2
+      with:
+        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT }}
+
+    - name: Deploy to an IIS webserver
+      if: ${{ inputs.DEPLOY_IIS == 'Deploy' }}
+      shell: cmd
+      run: npm run deploy --auth-service-ui-backoffice:ComputerName="https://${{ inputs.SERVER_IP }}:${{ inputs.SERVER_PORT }}/msdeploy.axd" --auth-service-ui-backoffice:UserName="${{ inputs.WEBDEPLOY_USER }}" --auth-service-ui-backoffice:Password="${{ inputs.WEBDEPLOY_PASSWORD }}" --auth-service-ui-backoffice:sourcePath="dist" --auth-service-ui-backoffice:destPath="${{ inputs.SITE_NAME }}"
+
+
+    # - name: 'Deploy to Azure WebApp'
+    #   id: deploy-to-webapp 
+    #   uses: azure/webapps-deploy@v2
+    #   with:
+    #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
+    #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+    #     package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}

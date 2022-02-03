@@ -1,0 +1,77 @@
+name: CI/CD - Package & IIS deploy
+on:
+  workflow_dispatch:
+    inputs:
+      CLIENT:
+        type: choice
+        description: Make a choice and move on
+        options:
+        - abc
+        - absa
+        - bankofAfrica
+        - bankofIndia
+        - bankofBaroda
+        - bou
+        - brac
+        - cairo
+        - dfcu
+        - dtb
+        - eco
+        - equity
+        - exim
+        - financetrust
+        - finca
+        - gtbank
+        - housing
+        - kcb
+        - laboremus
+        - mcb
+        - ncba
+        - opportunity
+        - orientbank
+        - pride
+        - Staging
+        - stanbic
+        - stanchart
+        - test
+        - topfinance
+        - tropical
+        - uba
+        - ugafode
+        - yako
+      CLIENT_ENV:
+        type: choice
+        description: Select environment
+        options:
+        - prod
+        - uat
+        - test
+        - sit
+      DOWNLOAD_PACKAGE:
+        type: choice
+        description: Should package?
+        default: 'Skip'
+        options:
+        - Download
+        - Skip
+      DEPLOY_IIS:
+        type: choice
+        description: Should IIS?
+        default: 'Skip'
+        options:
+        - Deploy
+        - Skip
+jobs:
+  RUN_PROCESS:
+    uses: ./.github/workflows/package-iis-node-root.yml
+    with:
+      CLIENT: "${{ github.event.inputs.CLIENT }}"
+      CLIENT_ENV: "${{ github.event.inputs.CLIENT_ENV }}"
+      DOWNLOAD_PACKAGE: "${{ github.event.inputs.DOWNLOAD_PACKAGE }}"
+      DEPLOY_IIS: "${{ github.event.inputs.DEPLOY_IIS }}"
+      SITE_NAME: "Bou_NationalIdVerification_Auth_Ui_React"
+      WEBDEPLOY_USER: "kevin"
+      WEBDEPLOY_PASSWORD: ${{ secrets.WEBDEPLOY_PASSWORD }}
+      SERVER_IP: "154.0.128.234"
+      SERVER_PORT: "18172"
+
