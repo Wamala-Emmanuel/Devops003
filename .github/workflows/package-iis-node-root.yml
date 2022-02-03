@@ -3,6 +3,10 @@ name: Root workflow
 on:
   workflow_call:
     inputs:
+      PROJECT_ROOT_DIRECTORY:
+        type: string
+      DOTNET_VERSION:
+        type: string
       CLIENT:
         type: string
       CLIENT_ENV:
@@ -15,49 +19,72 @@ on:
         type: string
       WEBDEPLOY_USER:
         type: string
+      WEBDEPLOY_PASSWORD:
+        type: string
       SERVER_IP:
         type: string
       SERVER_PORT:
         type: string
-
+        
     secrets:
-      WEBDEPLOY_PASSWORD:
+      NUGET_URL_pass:
         required: true
-
+      NUGET_TOKEN_pass:
+        required: true
 jobs:
   Build-Package-IIS_Deploy:
     runs-on: windows-latest
     environment: 'Production'
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14.x
-        cache: 'npm'
-
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build-${{ inputs.CLIENT }}-${{ inputs.CLIENT_ENV }} --if-present
-        npm run test --if-present
-
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v2
-      with:
-        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT_ENV }}
-        path: dist
-
-    - name: Download artifact from build job
-      if: ${{ inputs.DOWNLOAD_PACKAGE == 'Download' }}
-      uses: actions/download-artifact@v2
-      with:
-        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT_ENV }}
-
-    - name: Deploy to an IIS webserver
-      if: ${{ inputs.DEPLOY_IIS == 'Deploy' }}
-      run: npm run deploy --auth-service-ui-backoffice:ComputerName="https://${{ inputs.SERVER_IP }}:${{ inputs.SERVER_PORT }}/msdeploy.axd" --auth-service-ui-backoffice:UserName="${{ inputs.WEBDEPLOY_USER }}" --auth-service-ui-backoffice:Password="${{ secrets.WEBDEPLOY_PASSWORD }}" --auth-service-ui-backoffice:sourcePath="dist" --auth-service-ui-backoffice:destPath="${{ inputs.SITE_NAME }}"
+      - uses: actions/checkout@v2
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ inputs.DOTNET_VERSION }}
+          source-url: ${{ secrets.NUGET_URL_pass }}
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.NUGET_TOKEN_pass }}
+          
+      - name: Build and publish
+        run: |
+          dotnet build -c Release
+          dotnet publish --no-build -c Release -o ${{ env.DOTNET_ROOT}}\${{ inputs.PROJECT_ROOT_DIRECTORY }} /p:EnvironmentName=${{ inputs.CLIENT }}${{ inputs.CLIENT_ENV }}
+          
+      - name: Clean appsettings
+        run: |
+          cd ${{ env.DOTNET_ROOT}}/${{ inputs.PROJECT_ROOT_DIRECTORY }}
+          $jsonFiles = Get-ChildItem appsettings*json
+          foreach ($file in $jsonFiles) {
+            if ($file.Name -inotcontains "appsettings.json") {
+              if ($file.Name -inotcontains "appsettings.Config.json") {
+                if ($file.Name -inotcontains "appsettings.${{inputs.CLIENT}}${{inputs.CLIENT_ENV}}.json"){
+                  #Write-Host -id 3 -activity "Removing File $($file.Name)" -Status "In progress"
+                  Write-Host "$(Get-Date -f $timeStampFormat) - Removing File $($file.Name): In progress"
+                  Remove-Item $file
+                }
+              }     
+            }   
+          }
+          cd ..
+        shell: pwsh
+        
+      - name: Upload build Artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: '${{ inputs.PROJECT_ROOT_DIRECTORY }}'
+          path: '${{ env.DOTNET_ROOT}}/${{ inputs.PROJECT_ROOT_DIRECTORY }}'
+          
+      - name: Download build artifact
+        if: ${{ inputs.DOWNLOAD_PACKAGE == 'Download' }}
+        uses: actions/download-artifact@v2.1.0
+        with:
+          path: '${{ inputs.PROJECT_ROOT_DIRECTORY }}'
+          
+      - name: Deploy to an IIS webserver
+        if: ${{ inputs.DEPLOY_IIS == 'Deploy' }}
+        shell: cmd
+        run: '"C:/Program Files/IIS/Microsoft Web Deploy V3/msdeploy.exe" -verb:sync -allowUntrusted -source:contentPath="${{ env.DOTNET_ROOT}}/${{ inputs.PROJECT_ROOT_DIRECTORY }}" -dest:contentPath="${{ inputs.SITE_NAME }}",computerName="https://${{ inputs.SERVER_IP }}:${{ inputs.SERVER_PORT }}/msdeploy.axd?site=${{ inputs.SITE_NAME }}",username="${{ inputs.WEBDEPLOY_USER }}",password="${{ inputs.WEBDEPLOY_PASSWORD }}",authtype="Basic"'
 
 
     # - name: 'Deploy to Azure WebApp'
