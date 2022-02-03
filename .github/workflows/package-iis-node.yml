@@ -6,47 +6,51 @@ on:
         type: choice
         description: Make a choice and move on
         options:
-        - abc
-        - absa
-        - bankofAfrica
-        - bankofIndia
-        - bankofBaroda
-        - bou
-        - brac
-        - cairo
-        - dfcu
-        - dtb
-        - eco
-        - equity
-        - exim
-        - financetrust
-        - finca
-        - gtbank
-        - housing
-        - kcb
-        - laboremus
-        - mcb
-        - ncba
-        - opportunity
-        - orientbank
-        - pride
+        - Abc
+        - Absa
+        - BankOfAfrica
+        - BankOfIndia
+        - Baroda
+        - Bou
+        - Brac
+        - Cairobank
+        - Development
+        - Dfcu
+        - Dtb
+        - Ecobank
+        - Equity
+        - Exim
+        - FinanceTrust
+        - Finca
+        - GTBank
+        - HousingFinance
+        - Kcb
+        - Laboremus
+        - Mcb
+        - Ncba
+        - OpportunityBank
+        - Orient
+        - Pride
+        - Production
+        - SmileId
         - Staging
-        - stanbic
-        - stanchart
-        - test
-        - topfinance
-        - tropical
-        - uba
-        - ugafode
-        - yako
+        - Standbic
+        - StanCart
+        - Streamline
+        - Test
+        - TopFinance
+        - Tropical
+        - Uba
+        - Ugafode
+        - Yako
       CLIENT_ENV:
         type: choice
         description: Select environment
         options:
-        - prod
-        - uat
-        - test
-        - sit
+        - Prod
+        - Uat
+        - Test
+        - Sit
       DOWNLOAD_PACKAGE:
         type: choice
         description: Should package?
@@ -63,16 +67,19 @@ on:
         - Skip
 jobs:
   RUN_PROCESS:
-    uses: ./.github/workflows/package-iis-node-root.yml
+    uses: ./.github/workflows/az-webapps-dotnet-core-root.yml
     with:
+      DOTNET_VERSION: "2.1.x"
       CLIENT: "${{ github.event.inputs.CLIENT }}"
       CLIENT_ENV: "${{ github.event.inputs.CLIENT_ENV }}"
       DOWNLOAD_PACKAGE: "${{ github.event.inputs.DOWNLOAD_PACKAGE }}"
       DEPLOY_IIS: "${{ github.event.inputs.DEPLOY_IIS }}"
+      PROJECT_ROOT_DIRECTORY: "Laboremus_auth_api"
       SITE_NAME: "Bou_NationalIdVerification_Auth_Ui_React"
       WEBDEPLOY_USER: "kevin"
+      WEBDEPLOY_PASSWORD: "${{ secrets.WEBDEPLOY_PASSWORD }}"
       SERVER_IP: "154.0.128.234"
       SERVER_PORT: "18172"
     secrets:
-      WEBDEPLOY_PASSWORD: ${{ secrets.WEBDEPLOY_PASSWORD }}
-
+      NUGET_URL_pass: https://pkgs.dev.azure.com/laboremus-uganda/LUG/_packaging/LugNuGetFeed/nuget/v3/index.json
+      NUGET_TOKEN_pass: ${{ secrets.NUGET_TOKEN }}
