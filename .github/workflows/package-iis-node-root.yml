@@ -42,20 +42,20 @@ jobs:
     - name: npm install, build, and test
       run: |
         npm install
-        npm run build-${{ inputs.CLIENT }}-${{ inputs.CLIENT }} --if-present
+        npm run build-${{ inputs.CLIENT }}-${{ inputs.CLIENT_ENV }} --if-present
         npm run test --if-present
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
-        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT }}
+        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT_ENV }}
         path: dist
 
     - name: Download artifact from build job
       if: ${{ inputs.DOWNLOAD_PACKAGE == 'Download' }}
       uses: actions/download-artifact@v2
       with:
-        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT }}
+        name: AuthUI-${{ inputs.CLIENT }}-${{ inputs.CLIENT_ENV }}
 
     - name: Deploy to an IIS webserver
       if: ${{ inputs.DEPLOY_IIS == 'Deploy' }}
