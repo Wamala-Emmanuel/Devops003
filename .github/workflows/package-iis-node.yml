@@ -71,7 +71,8 @@ jobs:
       DEPLOY_IIS: "${{ github.event.inputs.DEPLOY_IIS }}"
       SITE_NAME: "Bou_NationalIdVerification_Auth_Ui_React"
       WEBDEPLOY_USER: "kevin"
-      WEBDEPLOY_PASSWORD: ${{ secrets.WEBDEPLOY_PASSWORD }}
       SERVER_IP: "154.0.128.234"
       SERVER_PORT: "18172"
+    secrets:
+      WEBDEPLOY_PASSWORD: ${{ secrets.WEBDEPLOY_PASSWORD }}
 
