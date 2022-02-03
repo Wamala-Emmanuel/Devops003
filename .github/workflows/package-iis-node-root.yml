@@ -59,6 +59,7 @@ jobs:
 
     - name: Deploy to an IIS webserver
       if: ${{ inputs.DEPLOY_IIS == 'Deploy' }}
+      shell: pwsh
       run: npm run deploy --auth-service-ui-backoffice:ComputerName="https://${{ inputs.SERVER_IP }}:${{ inputs.SERVER_PORT }}/msdeploy.axd" --auth-service-ui-backoffice:UserName="${{ inputs.WEBDEPLOY_USER }}" --auth-service-ui-backoffice:Password="${{ inputs.WEBDEPLOY_PASSWORD }}" --auth-service-ui-backoffice:sourcePath="dist" --auth-service-ui-backoffice:destPath="${{ inputs.SITE_NAME }}"
 
 
